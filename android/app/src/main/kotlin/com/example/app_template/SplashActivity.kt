@@ -1,4 +1,4 @@
-package com.example.app_template
+package com.example.sisyphus
 
 import android.content.Intent
 import android.os.Bundle

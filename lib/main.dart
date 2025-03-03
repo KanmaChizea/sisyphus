@@ -1,7 +1,6 @@
-import 'package:app_template/navigation/navigation_service.dart';
-import 'package:app_template/navigation/routes.dart';
-import 'package:app_template/theme/colors.dart';
-import 'package:app_template/theme/textstyles.dart';
+import 'package:sisyphus/navigation/navigation_service.dart';
+import 'package:sisyphus/navigation/routes.dart';
+import 'package:sisyphus/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'core/dependency_injection/injection_container.dart' as di;
 
@@ -18,11 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       navigatorKey: navigatorKey,
-      theme: Theme.of(context).copyWith(extensions: [
-        AppColorsTheme.light(),
-        AppTextTheme.main(),
-      ]),
+      theme: Theme.of(context).copyWith(extensions: [AppColorsTheme.light()]),
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
-  }          
+  }
 }

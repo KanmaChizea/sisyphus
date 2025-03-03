@@ -1,4 +1,4 @@
-# app_template
+# sisyphus
 
 A new Flutter project.
 

@@ -1,33 +1,49 @@
 import 'package:flutter/material.dart';
 
 class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
-  static const _white = Color(0xFFF9F9F9);
-  static const _black = Color(0xFF0A0A0A);
-  static const _red = Color(0xFFFF0000);
-
-  final Color backgroundDefault;
-  final Color primary;
-  final Color textDefault;
+  final Color background;
+  final Color foreground;
+  final Color border;
+  final Color green;
+  final Color red;
+  final Color grey1;
+  final Color grey2;
+  final Color text;
 
   const AppColorsTheme._internal({
-    required this.backgroundDefault,
-    required this.primary,
-    required this.textDefault,
+    required this.background,
+    required this.foreground,
+    required this.border,
+    required this.green,
+    required this.red,
+    required this.grey1,
+    required this.grey2,
+    required this.text,
   });
 
   factory AppColorsTheme.light() {
     return const AppColorsTheme._internal(
-      backgroundDefault: _white,
-      primary: _red,
-      textDefault: _black,
+      background: Color(0xFFF8F8F9),
+      foreground: Color(0xFFFFFFFF),
+      text: Color(0xFF1C2127),
+      border: Color(0xFFF1F1F1),
+      red: Color(0xFFFF554A),
+      green: Color(0xFF25C26E),
+      grey1: Color(0xFF737A91),
+      grey2: Color(0xFFCFD3D8),
     );
   }
 
   factory AppColorsTheme.dark() {
     return const AppColorsTheme._internal(
-      backgroundDefault: _white,
-      primary: _red,
-      textDefault: _black,
+      background: Color(0xFF1C2127),
+      foreground: Color(0xFF17181B),
+      text: Color(0xFFFFFFFF),
+      border: Color(0xFF262932),
+      red: Color(0xFFFF554A),
+      green: Color(0xFF25C26E),
+      grey1: Color(0xFFA7B1BC),
+      grey2: Color(0xFF555C63),
     );
   }
 
@@ -41,7 +57,9 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
 
   @override
   ThemeExtension<AppColorsTheme> lerp(
-      covariant ThemeExtension<AppColorsTheme>? other, double t) {
+    covariant ThemeExtension<AppColorsTheme>? other,
+    double t,
+  ) {
     return this;
   }
 }
