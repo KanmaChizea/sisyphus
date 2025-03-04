@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisyphus/theme/extension.dart';
 
-class Typography extends StatelessWidget {
-  const Typography(
+class AppText extends StatelessWidget {
+  const AppText(
     String this.data, {
     super.key,
     this.weight,

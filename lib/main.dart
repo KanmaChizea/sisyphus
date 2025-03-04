@@ -15,9 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Sisyphus',
+      debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
-      theme: Theme.of(context).copyWith(extensions: [AppColorsTheme.light()]),
+      // themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.system,
+      theme: ThemeData(extensions: [AppColorsTheme.light()]),
+      darkTheme: ThemeData(extensions: [AppColorsTheme.dark()]),
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
