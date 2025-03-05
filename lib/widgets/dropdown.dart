@@ -49,6 +49,7 @@ class Dropdown<T> extends StatelessWidget {
         child: DropdownButton<T>(
           value: value,
           menuWidth: menuWidth ?? width,
+          isDense: true,
           icon: AppIcons.svg(
             AppIcons.arrowDown,
             color: Theme.of(context).appColors.grey1,

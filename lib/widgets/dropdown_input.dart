@@ -29,7 +29,7 @@ class DropdownInput<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 16),
+      padding: const EdgeInsets.fromLTRB(16, 8, 0, 8),
       decoration: BoxDecoration(
         border: Border.all(color: Theme.of(context).appColors.border),
         borderRadius: BorderRadius.circular(8),

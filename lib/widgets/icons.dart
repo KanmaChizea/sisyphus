@@ -15,9 +15,12 @@ class AppIcons {
   static const String clock = '${_basePath}clock.svg';
   static const String currency = '${_basePath}currency.svg';
   static const String down = '${_basePath}down.svg';
+  static const String greenLine = '${_basePath}green-line.svg';
   static const String info = '${_basePath}info-circle.svg';
   static const String logo = '${_basePath}logo.svg';
   static const String menu = '${_basePath}menu.svg';
+  static const String redLine = '${_basePath}red-line.svg';
+  static const String redGreenLine = '${_basePath}red-green-line.svg';
   static const String search = '${_basePath}search.svg';
   static const String volume = '${_basePath}volume.svg';
   static const String web = '${_basePath}globe.svg';
