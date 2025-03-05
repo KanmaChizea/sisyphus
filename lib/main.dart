@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
       title: 'Sisyphus',
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
-      // themeMode: ThemeMode.dark,
       themeMode: ThemeMode.system,
       theme: ThemeData(extensions: [AppColorsTheme.light()]),
       darkTheme: ThemeData(extensions: [AppColorsTheme.dark()]),
