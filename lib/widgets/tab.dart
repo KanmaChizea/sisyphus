@@ -9,15 +9,35 @@ class CustomTab extends StatefulWidget {
     required this.tabTitles,
     this.tabHeight,
     required this.children,
+    this.tabStyle,
+    this.tabContainerStyle,
+    this.tabBarIndicatorSize,
   }) : assert(
          children.length == tabTitles.length,
          'children and tabTitles must have the same length', // so the tabs can have equal width
        );
+
+  /// Whether the tabs should be scrollable or not. Defaults to false
+  /// If false, the tabs will occupy the width of the screen and each tab will be of equal width
+  /// if true, the tabs will be scrollable and the tabTitles will be used to determine the width of the tabs
   final bool scrollable;
+
+  /// The width of the tabs. Provide this if [isScrollable] is true and you want the tabs to have equal width.
   final double? tabWidth;
+
   final List<String> tabTitles;
+
+  /// The height of the tabs
   final double? tabHeight;
   final List<Widget> children;
+
+  /// Styles a single tab itself
+  final BoxDecoration? tabStyle;
+
+  /// Styles the container of the tab
+  final BoxDecoration? tabContainerStyle;
+
+  final TabBarIndicatorSize? tabBarIndicatorSize;
   @override
   State<CustomTab> createState() => _CustomTabState();
 }
@@ -25,6 +45,8 @@ class CustomTab extends StatefulWidget {
 class _CustomTabState extends State<CustomTab>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
+  int index = 0;
 
   @override
   void initState() {
@@ -41,6 +63,45 @@ class _CustomTabState extends State<CustomTab>
     super.dispose();
   }
 
+  BoxDecoration buildTabDecoration() {
+    return BoxDecoration(
+      borderRadius: widget.tabStyle?.borderRadius ?? BorderRadius.circular(10),
+      color: widget.tabStyle?.color ?? Theme.of(context).appColors.foreground,
+      border: widget.tabStyle?.border,
+      boxShadow: widget.tabStyle?.boxShadow,
+      gradient: widget.tabStyle?.gradient,
+      shape: widget.tabStyle?.shape ?? BoxShape.rectangle,
+      image: widget.tabStyle?.image,
+      backgroundBlendMode: widget.tabStyle?.backgroundBlendMode,
+    );
+  }
+
+  BoxDecoration buildTabContainerDecoration() {
+    return BoxDecoration(
+      color:
+          widget.tabContainerStyle?.color ?? Theme.of(context).appColors.border,
+      borderRadius:
+          widget.tabContainerStyle?.borderRadius ?? BorderRadius.circular(10),
+      border: widget.tabContainerStyle?.border,
+      image: widget.tabContainerStyle?.image,
+      gradient: widget.tabContainerStyle?.gradient,
+      boxShadow:
+          widget.tabContainerStyle?.boxShadow ??
+          [
+            BoxShadow(
+              offset: const Offset(0, 3),
+              blurRadius: 1,
+              color: Colors.black12.withAlpha(10),
+            ),
+            BoxShadow(
+              offset: const Offset(0, 3),
+              blurRadius: 8,
+              color: Colors.black12.withAlpha(30),
+            ),
+          ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,32 +109,22 @@ class _CustomTabState extends State<CustomTab>
         Container(
           height: widget.tabHeight ?? 40,
           padding: const EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            color: Theme.of(context).appColors.border,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                offset: const Offset(0, 3),
-                blurRadius: 1,
-                color: Colors.black12.withValues(alpha: 0.04),
-              ),
-              BoxShadow(
-                offset: const Offset(0, 3),
-                blurRadius: 8,
-                color: Colors.black12.withValues(alpha: 0.12),
-              ),
-            ],
-          ),
+          margin: const EdgeInsets.only(bottom: 16),
+          decoration: buildTabContainerDecoration(),
           child: TabBar(
             isScrollable: widget.scrollable,
+            labelPadding: EdgeInsets.zero,
+            onTap: (idx) {
+              setState(() {
+                index = idx;
+              });
+            },
             tabAlignment:
                 widget.scrollable ? TabAlignment.start : TabAlignment.fill,
             controller: _tabController,
-            indicator: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Theme.of(context).appColors.foreground,
-            ),
-            indicatorSize: TabBarIndicatorSize.tab,
+            indicator: buildTabDecoration(),
+            indicatorSize:
+                widget.tabBarIndicatorSize ?? TabBarIndicatorSize.tab,
             indicatorAnimation: TabIndicatorAnimation.elastic,
             dividerHeight: 0,
             labelColor: Theme.of(context).appColors.text,
@@ -85,19 +136,29 @@ class _CustomTabState extends State<CustomTab>
             tabs:
                 widget.tabTitles
                     .map(
-                      (title) => SizedBox(
+                      (title) => Container(
                         width: widget.tabWidth,
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Tab(text: title),
                       ),
                     )
                     .toList(),
           ),
         ),
-        SizedBox(
-          height: 300,
-          child: TabBarView(
-            controller: _tabController,
-            children: widget.children,
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            final offsetAnimation = Tween<Offset>(
+              begin: const Offset(-1.0, 0.0),
+              end: Offset.zero,
+            ).animate(
+              CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+            );
+            return SlideTransition(position: offsetAnimation, child: child);
+          },
+          child: Container(
+            key: ValueKey<int>(index),
+            child: widget.children[index],
           ),
         ),
       ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sisyphus/navigation/navigation_service.dart';
 import 'package:sisyphus/theme/extension.dart';
@@ -8,10 +7,15 @@ class AppIcons {
   AppIcons._();
   static const String _basePath = 'assets/svgs/';
 
-  static const String menu = '${_basePath}menu.svg';
-  static const String web = '${_basePath}globe.svg';
+  static const String arrowDown = '${_basePath}arrow-down.svg';
+  static const String arrowDownRound = '${_basePath}arrow-down-round.svg';
+  static const String check = '${_basePath}check.svg';
+  static const String checkActive = '${_basePath}check-active.svg';
+  static const String info = '${_basePath}info-circle.svg';
   static const String logo = '${_basePath}logo.svg';
+  static const String menu = '${_basePath}menu.svg';
   static const String search = '${_basePath}search.svg';
+  static const String web = '${_basePath}globe.svg';
 
   /// Returns an SVG icon widget
   static Widget svg(

@@ -15,47 +15,31 @@ class Orders extends StatelessWidget {
         children: [
           CustomTab(
             scrollable: true,
-            tabWidth: 100,
+            tabWidth: 159,
             tabTitles: const [
               'Open Orders',
               'Positions',
               'Order History',
               'Trade History',
             ],
-            children: const [
-              Padding(
-                padding: EdgeInsets.only(right: 8),
-                child: EmptyState(
-                  title: 'No Open Orders',
-                  text:
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.',
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 8),
-                child: EmptyState(
-                  title: 'No Positions',
-                  text:
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.',
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 8),
-                child: EmptyState(
-                  title: 'No Order History',
-                  text:
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.',
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 8),
-                child: EmptyState(
-                  title: 'No Trade History',
-                  text:
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.',
-                ),
-              ),
-            ],
+            children:
+                [
+                      'No Open Orders',
+                      'No Positions',
+                      'No Order History',
+                      'No Trade History',
+                    ]
+                    .map(
+                      (elememt) => Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 128, 16, 54),
+                        child: EmptyState(
+                          title: elememt,
+                          text:
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.',
+                        ),
+                      ),
+                    )
+                    .toList(),
           ),
         ],
       ),

@@ -19,10 +19,7 @@ abstract class ViewModelWidget<T extends BlocBase> extends StatelessWidget {
       create: createViewModel,
       child: Builder(
         builder: (context) {
-          return buildView(
-            context,
-            context.read<T>(),
-          );
+          return buildView(context, context.read<T>());
         },
       ),
     );

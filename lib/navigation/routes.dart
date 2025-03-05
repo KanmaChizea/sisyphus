@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sisyphus/screens/home/view.dart';
+import 'package:sisyphus/screens/home/home_view.dart';
 
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
