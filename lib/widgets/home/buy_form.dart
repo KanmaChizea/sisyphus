@@ -4,6 +4,7 @@ import 'package:sisyphus/screens/buy_sell/buy_sell_state.dart';
 import 'package:sisyphus/screens/buy_sell/buy_sell_viewmodel.dart';
 import 'package:sisyphus/theme/extension.dart';
 import 'package:sisyphus/utils/helpers/formatters.dart';
+import 'package:sisyphus/utils/helpers/validation.dart';
 import 'package:sisyphus/widgets/button.dart';
 import 'package:sisyphus/widgets/check_item.dart';
 import 'package:sisyphus/widgets/dropdown.dart';
@@ -23,6 +24,7 @@ class BuyForm extends StatefulWidget {
 class _BuyFormState extends State<BuyForm> {
   late TextEditingController limitController;
   late TextEditingController amountController;
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -62,122 +64,131 @@ class _BuyFormState extends State<BuyForm> {
       children: [
         SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 16,
-            children: [
-              InputField(
-                controller: limitController,
-                label: 'Limit price',
-                suffix: currencySuffix,
-                fieldInfo: "The maximum price you're willing to pay",
-                hintText: '0.00',
-                keyboardType: TextInputType.number,
-                onChangeText: viewmodel.onLimitChange,
-              ),
-              InputField(
-                controller: amountController,
-                label: 'Amount',
-                suffix: currencySuffix,
-                fieldInfo: "how much you want to buy",
-                hintText: '0.00',
-                keyboardType: TextInputType.number,
-                onChangeText: viewmodel.onAmountChange,
-              ),
-              DropdownInput(
-                label: 'Type',
-                onChanged: viewmodel.selectOrderType,
-                list: state.typeOptions,
-                value: state.selectedType,
-                fieldInfo:
-                    """- GTC (Good Till Canceled): Order stays active until canceled.
-- FOK (Fill or Kill): Must fill completely or cancel.
-- IOC (Immediate or Cancel): Fills immediately, cancels unfilled portion.
-""",
-                child: (val) => AppText(val?.value ?? ''),
-              ),
-              CheckItem(
-                isActive: state.postOnly,
-                onChange: viewmodel.togglePostOnly,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 5,
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 16,
+              children: [
+                InputField(
+                  controller: limitController,
+                  label: 'Limit price',
+                  suffix: currencySuffix,
+                  fieldInfo: "The maximum price you're willing to pay",
+                  hintText: '0.00',
+                  keyboardType: TextInputType.number,
+                  onChangeText: viewmodel.onLimitChange,
+                  validator: Validator.validateRequired,
+                ),
+                InputField(
+                  controller: amountController,
+                  label: 'Amount',
+                  suffix: currencySuffix,
+                  fieldInfo: "how much you want to buy",
+                  hintText: '0.00',
+                  keyboardType: TextInputType.number,
+                  onChangeText: viewmodel.onAmountChange,
+                  validator: Validator.validateRequired,
+                ),
+                DropdownInput(
+                  label: 'Type',
+                  onChanged: viewmodel.selectOrderType,
+                  list: state.typeOptions,
+                  value: state.selectedType,
+                  fieldInfo:
+                      """- GTC (Good Till Canceled): Order stays active until canceled.
+            - FOK (Fill or Kill): Must fill completely or cancel.
+            - IOC (Immediate or Cancel): Fills immediately, cancels unfilled portion.
+            """,
+                  child: (val) => AppText(val?.value ?? ''),
+                ),
+                CheckItem(
+                  isActive: state.postOnly,
+                  onChange: viewmodel.togglePostOnly,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 5,
+                    children: [
+                      AppText(
+                        'Post-only',
+                        size: 12,
+                        weight: FontWeight.w500,
+                        color: Theme.of(context).appColors.grey1,
+                      ),
+                      AppIcons.svg(AppIcons.info, size: 12),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  spacing: 12,
                   children: [
                     AppText(
-                      'Post-only',
+                      'Total',
                       size: 12,
                       weight: FontWeight.w500,
                       color: Theme.of(context).appColors.grey1,
                     ),
-                    AppIcons.svg(AppIcons.info, size: 12),
+                    AppText(
+                      Formatters.parseAndFormatNumber(
+                        state.totalValue.toString(),
+                      ),
+                      size: 12,
+                      weight: FontWeight.w500,
+                      color: Theme.of(context).appColors.grey1,
+                    ),
                   ],
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                spacing: 12,
-                children: [
-                  AppText(
-                    'Total',
-                    size: 12,
-                    weight: FontWeight.w500,
-                    color: Theme.of(context).appColors.grey1,
-                  ),
-                  AppText(
-                    Formatters.parseAndFormatNumber(
-                      state.totalValue.toString(),
+                SizedBox(
+                  height: 32,
+                  child: CustomButton(
+                    text: 'Buy BTC',
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color(0xFF483BEB),
+                        Color(0xFF7847E1),
+                        Color(0xFFDD568D),
+                      ],
                     ),
-                    size: 12,
-                    weight: FontWeight.w500,
-                    color: Theme.of(context).appColors.grey1,
+                    onPressed:
+                        () => {
+                          if (formKey.currentState?.validate() == true)
+                            {viewmodel.buyBtc()},
+                        },
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 32,
-                child: CustomButton(
-                  text: 'Buy BTC',
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color(0xFF483BEB),
-                      Color(0xFF7847E1),
-                      Color(0xFFDD568D),
-                    ],
-                  ),
-                  onPressed: viewmodel.buyBtc,
                 ),
-              ),
-              Divider(color: Theme.of(context).appColors.border),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  PriceValue(
-                    title: 'Total account value',
-                    value: state.totalAccount,
-                  ),
-                  Dropdown(
-                    onChanged: viewmodel.selectCurrency,
-                    list: state.currencies,
-                    value: state.selectedCurrency,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  PriceValue(title: 'Open Orders', value: state.openOrders),
-                  PriceValue(title: 'Available', value: state.availablePrice),
-                ],
-              ),
-              SizedBox(
-                width: 80,
-                child: CustomButton(
-                  text: 'Deposit',
-                  backgroundColor: const Color(0xFF2764FF),
-                  onPressed: viewmodel.deposit,
+                Divider(color: Theme.of(context).appColors.border),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PriceValue(
+                      title: 'Total account value',
+                      value: state.totalAccount,
+                    ),
+                    Dropdown(
+                      onChanged: viewmodel.selectCurrency,
+                      list: state.currencies,
+                      value: state.selectedCurrency,
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PriceValue(title: 'Open Orders', value: state.openOrders),
+                    PriceValue(title: 'Available', value: state.availablePrice),
+                  ],
+                ),
+                SizedBox(
+                  width: 80,
+                  child: CustomButton(
+                    text: 'Deposit',
+                    backgroundColor: const Color(0xFF2764FF),
+                    onPressed: viewmodel.deposit,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Container(height: MediaQuery.of(context).size.height * 0.6),
