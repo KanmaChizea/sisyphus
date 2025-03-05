@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sisyphus/screens/buy_sell/buy_sell_state.dart';
 import 'package:sisyphus/screens/buy_sell/buy_sell_viewmodel.dart';
 import 'package:sisyphus/theme/extension.dart';
@@ -7,15 +6,15 @@ import 'package:sisyphus/utils/viewmodel/viewmodel_widget.dart';
 import 'package:sisyphus/widgets/home/buy_form.dart';
 import 'package:sisyphus/widgets/tab.dart';
 
-class BuySellView extends ViewModelWidget {
+class BuySellView extends ViewModelWidget<BuySellViewmodel, BuySellState> {
   final FormTab initialTab;
   const BuySellView(this.initialTab, {super.key});
 
   @override
-  BlocBase createViewModel(BuildContext context) => BuySellViewmodel();
+  BuySellViewmodel createViewModel(BuildContext context) => BuySellViewmodel();
 
   @override
-  Widget buildView(BuildContext context, BlocBase viewModel) {
+  Widget createView(context, viewModel, state) {
     return Wrap(
       children: [
         Container(
@@ -28,6 +27,7 @@ class BuySellView extends ViewModelWidget {
             ),
           ),
           child: CustomTab(
+            initialIndex: initialTab.index,
             tabTitles: const ['Buy', 'Sell'],
             tabStyle: BoxDecoration(
               border: Border.all(color: Theme.of(context).appColors.green),

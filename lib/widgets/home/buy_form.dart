@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sisyphus/screens/buy_sell/buy_sell_state.dart';
 import 'package:sisyphus/screens/buy_sell/buy_sell_viewmodel.dart';
 import 'package:sisyphus/theme/extension.dart';
+import 'package:sisyphus/utils/helpers/formatters.dart';
 import 'package:sisyphus/widgets/button.dart';
 import 'package:sisyphus/widgets/check_item.dart';
 import 'package:sisyphus/widgets/dropdown.dart';
@@ -72,6 +73,7 @@ class _BuyFormState extends State<BuyForm> {
                 fieldInfo: "The maximum price you're willing to pay",
                 hintText: '0.00',
                 keyboardType: TextInputType.number,
+                onChangeText: viewmodel.onLimitChange,
               ),
               InputField(
                 controller: amountController,
@@ -80,6 +82,7 @@ class _BuyFormState extends State<BuyForm> {
                 fieldInfo: "how much you want to buy",
                 hintText: '0.00',
                 keyboardType: TextInputType.number,
+                onChangeText: viewmodel.onAmountChange,
               ),
               DropdownInput(
                 label: 'Type',
@@ -121,7 +124,9 @@ class _BuyFormState extends State<BuyForm> {
                     color: Theme.of(context).appColors.grey1,
                   ),
                   AppText(
-                    state.totalValue.toStringAsFixed(2),
+                    Formatters.parseAndFormatNumber(
+                      state.totalValue.toString(),
+                    ),
                     size: 12,
                     weight: FontWeight.w500,
                     color: Theme.of(context).appColors.grey1,

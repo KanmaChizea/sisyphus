@@ -3,23 +3,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// This widget provides base functionality for MVVM architechture using BLOC/Cubits
 /// It binds view model to view easily
-abstract class ViewModelWidget<T extends BlocBase> extends StatelessWidget {
-  const ViewModelWidget({super.key});
+/// A generic reusable widget that creates a BLoC-based view with a custom view model
+abstract class ViewModelWidget<B extends Cubit<S>, S> extends StatelessWidget {
+  /// Optional listener for state changes
+  final void Function(BuildContext, S)? listener;
 
-  /// Creates the view model
-  T createViewModel(BuildContext context);
+  const ViewModelWidget({super.key, this.listener});
 
-  /// The equivalent of stateless widget's build function
-  /// Builds the view for the viewmodel
-  Widget buildView(BuildContext context, T viewModel);
+  /// Abstract method to create the BLoC (view model)
+  B createViewModel(BuildContext context);
+
+  /// Abstract method to create the view widget that receives the BLoC and current state
+  Widget createView(BuildContext context, B bloc, S state);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: createViewModel,
-      child: Builder(
-        builder: (context) {
-          return buildView(context, context.read<T>());
+    return BlocProvider<B>(
+      create: (context) => createViewModel(context),
+      child: BlocConsumer<B, S>(
+        listener: (context, state) {
+          listener?.call(context, state);
+        },
+        builder: (context, state) {
+          // Get the bloc instance from the context
+          final bloc = context.read<B>();
+
+          // Call the view creation method with context, bloc, and current state
+          return createView(context, bloc, state);
         },
       ),
     );

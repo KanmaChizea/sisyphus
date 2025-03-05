@@ -12,6 +12,7 @@ class CustomTab extends StatefulWidget {
     this.tabStyle,
     this.tabContainerStyle,
     this.tabBarIndicatorSize,
+    this.initialIndex = 0,
   }) : assert(
          children.length == tabTitles.length,
          'children and tabTitles must have the same length', // so the tabs can have equal width
@@ -38,6 +39,8 @@ class CustomTab extends StatefulWidget {
   final BoxDecoration? tabContainerStyle;
 
   final TabBarIndicatorSize? tabBarIndicatorSize;
+
+  final int initialIndex;
   @override
   State<CustomTab> createState() => _CustomTabState();
 }
@@ -46,14 +49,16 @@ class _CustomTabState extends State<CustomTab>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  int index = 0;
+  late int index;
 
   @override
   void initState() {
     super.initState();
+    index = widget.initialIndex;
     _tabController = TabController(
       vsync: this,
       length: widget.tabTitles.length,
+      initialIndex: widget.initialIndex,
     );
   }
 

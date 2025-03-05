@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sisyphus/core/constants/images.dart';
 import 'package:sisyphus/screens/buy_sell/buy_sell_state.dart';
 import 'package:sisyphus/screens/buy_sell/buy_sell_view.dart';
-import 'package:sisyphus/screens/buy_sell/buy_sell_viewmodel.dart';
+import 'package:sisyphus/screens/home/home_state.dart';
 import 'package:sisyphus/screens/home/home_viewmodel.dart';
 import 'package:sisyphus/theme/extension.dart';
 import 'package:sisyphus/utils/viewmodel/viewmodel_widget.dart';
@@ -15,14 +14,14 @@ import 'package:sisyphus/widgets/home/orders.dart';
 import 'package:sisyphus/widgets/home/top_info.dart';
 import 'package:sisyphus/widgets/icons.dart';
 
-class HomeView extends ViewModelWidget {
+class HomeView extends ViewModelWidget<HomeViewmodel, HomeState> {
   const HomeView({super.key});
 
   @override
-  BlocBase createViewModel(BuildContext context) => HomeViewmodel();
+  HomeViewmodel createViewModel(BuildContext context) => HomeViewmodel();
 
   @override
-  Widget buildView(BuildContext context, BlocBase viewModel) {
+  Widget createView(context, viewModel, state) {
     return Scaffold(
       backgroundColor: Theme.of(context).appColors.background,
       appBar: AppBar(
@@ -75,10 +74,7 @@ class HomeView extends ViewModelWidget {
                               context: context,
                               isScrollControlled: true,
                               builder:
-                                  (context) => BlocProvider(
-                                    create: (_) => BuySellViewmodel(),
-                                    child: const BuySellView(FormTab.buy),
-                                  ),
+                                  (context) => const BuySellView(FormTab.sell),
                             ),
                           },
                     ),
