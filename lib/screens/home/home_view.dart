@@ -18,7 +18,8 @@ class HomeView extends ViewModelWidget<HomeViewmodel, HomeState> {
   const HomeView({super.key});
 
   @override
-  HomeViewmodel createViewModel(BuildContext context) => HomeViewmodel();
+  HomeViewmodel createViewModel(BuildContext context) =>
+      HomeViewmodel()..initialize();
 
   @override
   Widget createView(context, viewModel, state) {
@@ -35,8 +36,11 @@ class HomeView extends ViewModelWidget<HomeViewmodel, HomeState> {
       ),
       body: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(child: TopInfo()),
-          SliverToBoxAdapter(child: DataContent()),
+          const SliverToBoxAdapter(child: SizedBox(height: 8)),
+          const SliverToBoxAdapter(child: TopInfo()),
+          const SliverToBoxAdapter(child: SizedBox(height: 8)),
+          const SliverToBoxAdapter(child: DataContent()),
+          const SliverToBoxAdapter(child: SizedBox(height: 8)),
           const SliverToBoxAdapter(child: Orders()),
           SliverToBoxAdapter(
             child: Container(

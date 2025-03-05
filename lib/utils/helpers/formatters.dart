@@ -45,4 +45,23 @@ class Formatters {
     String cleanString = numberString.replaceAll(',', '');
     return double.tryParse(cleanString) ?? 0;
   }
+
+  static String formatMoney(double amount, [String? currency]) {
+    final format = NumberFormat.currency(
+      symbol: currency ?? '',
+      decimalDigits: 2,
+    );
+    return format.format(amount).trim();
+  }
+
+  static String stringToPercent(String value) {
+    double parsedValue = parseFormattedNumber(value);
+
+    return "${parsedValue < 0 ? '-' : '+'}${parsedValue.toStringAsFixed(2)}%";
+  }
+
+  static String formatStringNumber(String value) {
+    double parsedValue = parseFormattedNumber(value);
+    return parsedValue.toStringAsFixed(2);
+  }
 }

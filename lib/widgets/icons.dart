@@ -9,12 +9,17 @@ class AppIcons {
 
   static const String arrowDown = '${_basePath}arrow-down.svg';
   static const String arrowDownRound = '${_basePath}arrow-down-round.svg';
+  static const String arrowUp = '${_basePath}arrow-up.svg';
   static const String check = '${_basePath}check.svg';
   static const String checkActive = '${_basePath}check-active.svg';
+  static const String clock = '${_basePath}clock.svg';
+  static const String currency = '${_basePath}currency.svg';
+  static const String down = '${_basePath}down.svg';
   static const String info = '${_basePath}info-circle.svg';
   static const String logo = '${_basePath}logo.svg';
   static const String menu = '${_basePath}menu.svg';
   static const String search = '${_basePath}search.svg';
+  static const String volume = '${_basePath}volume.svg';
   static const String web = '${_basePath}globe.svg';
 
   /// Returns an SVG icon widget

@@ -13,6 +13,9 @@ class Dropdown<T> extends StatelessWidget {
     this.menuWidth,
     this.itemBuilder,
     this.child,
+    this.valueSize,
+    this.valueWeight,
+    this.iconSize,
   });
   final T? value;
   final Function(T?) onChanged;
@@ -27,10 +30,19 @@ class Dropdown<T> extends StatelessWidget {
   /// not specified but [child] is, the [child] will be used
   final Widget Function(T?)? itemBuilder;
 
+  /// this sets the font size of the selected item
+  final double? valueSize;
+
+  /// this sets the icon size of the dropdown arrow
+  final double? iconSize;
+
+  /// this sets the font weight of the selected item
+  final FontWeight? valueWeight;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? (MediaQuery.of(context).size.width * 0.5),
+      width: width,
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Align(
         alignment: Alignment.centerRight,
@@ -40,7 +52,7 @@ class Dropdown<T> extends StatelessWidget {
           icon: AppIcons.svg(
             AppIcons.arrowDown,
             color: Theme.of(context).appColors.grey1,
-            size: 16,
+            size: iconSize ?? 16,
           ),
           elevation: 1,
           dropdownColor: Theme.of(context).appColors.background,
@@ -58,7 +70,11 @@ class Dropdown<T> extends StatelessWidget {
                     child:
                         child != null
                             ? child!(value)
-                            : AppText(value.toString()),
+                            : AppText(
+                              value.toString(),
+                              size: valueSize,
+                              weight: valueWeight,
+                            ),
                   ),
                 )
                 .toList();

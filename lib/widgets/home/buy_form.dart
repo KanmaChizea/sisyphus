@@ -150,11 +150,9 @@ class _BuyFormState extends State<BuyForm> {
                         Color(0xFFDD568D),
                       ],
                     ),
-                    onPressed:
-                        () => {
-                          if (formKey.currentState?.validate() == true)
-                            {viewmodel.buyBtc()},
-                        },
+                    onPressed: () {
+                      viewmodel.buyBtc();
+                    },
                   ),
                 ),
                 Divider(color: Theme.of(context).appColors.border),
@@ -166,6 +164,7 @@ class _BuyFormState extends State<BuyForm> {
                       value: state.totalAccount,
                     ),
                     Dropdown(
+                      width: (MediaQuery.of(context).size.width * 0.5),
                       onChanged: viewmodel.selectCurrency,
                       list: state.currencies,
                       value: state.selectedCurrency,

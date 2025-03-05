@@ -46,6 +46,7 @@ class DropdownInput<T> extends StatelessWidget {
               list: list,
               child: child,
               itemBuilder: itemBuilder,
+              width: (MediaQuery.of(context).size.width * 0.5),
               menuWidth: MediaQuery.of(context).size.width * 0.5,
             ),
           ),

@@ -52,6 +52,7 @@ class CheckItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Theme.of(context).appColors.background,
       child: InkWell(
         onTap: () => onChange(!isActive),
         child: Row(

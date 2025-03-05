@@ -4,10 +4,9 @@ import 'package:sisyphus/utils/helpers/formatters.dart';
 import 'package:sisyphus/widgets/tooltip.dart';
 import 'package:sisyphus/widgets/typography.dart';
 
-class InputField extends FormField<String> {
-  InputField({
+class InputField extends StatefulWidget {
+  const InputField({
     super.key,
-    super.validator,
     required this.controller,
     this.hintText,
     required this.label,
@@ -16,49 +15,10 @@ class InputField extends FormField<String> {
     this.fieldInfo,
     this.keyboardType,
     this.onChangeText,
-  }) : super(
-         initialValue: controller.text,
-         builder: (state) {
-           return InputFieldState(
-             state: state,
-             controller: controller,
-             hintText: hintText,
-             label: label,
-             obscureText: obscureText,
-             suffix: suffix,
-             validator: validator,
-           );
-         },
-       );
-  final TextEditingController controller;
-  final String? hintText;
-  final String label;
-  final bool? obscureText;
-  final Widget? suffix;
-  final String? fieldInfo;
-  final TextInputType? keyboardType;
-  final Function(String)? onChangeText;
-
-  // @override
-  // State<InputField> createState() => _InputFieldState();
-}
-
-class InputFieldState extends StatefulWidget {
-  const InputFieldState({
-    super.key,
-    required this.state,
-    this.hintText,
-    required this.label,
-    this.obscureText,
-    this.suffix,
-    this.fieldInfo,
-    this.keyboardType,
-    this.onChangeText,
-    required this.controller,
     this.validator,
   });
 
-  final FormFieldState<String> state;
+  final TextEditingController controller;
   final String? hintText;
   final String label;
   final bool? obscureText;
@@ -66,14 +26,13 @@ class InputFieldState extends StatefulWidget {
   final String? fieldInfo;
   final TextInputType? keyboardType;
   final Function(String)? onChangeText;
-  final TextEditingController controller;
   final FormFieldValidator<String>? validator;
 
   @override
-  State<InputFieldState> createState() => _InputFieldStateState();
+  State<InputField> createState() => _InputFieldState();
 }
 
-class _InputFieldStateState extends State<InputFieldState> {
+class _InputFieldState extends State<InputField> {
   String? _errorText;
   late FocusNode _focusNode;
 
@@ -86,7 +45,6 @@ class _InputFieldStateState extends State<InputFieldState> {
 
   void _handleFocusChange() {
     if (!_focusNode.hasFocus) {
-      // When the field loses focus, validate
       setState(() {
         _errorText = widget.validator?.call(widget.controller.text);
       });
@@ -102,10 +60,6 @@ class _InputFieldStateState extends State<InputFieldState> {
 
   @override
   Widget build(BuildContext context) {
-    final bool shouldShowError =
-        _errorText != null ||
-        (widget.state.hasError &&
-            (widget.state.errorText?.isNotEmpty ?? false));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -114,7 +68,7 @@ class _InputFieldStateState extends State<InputFieldState> {
           decoration: BoxDecoration(
             border: Border.all(
               color:
-                  shouldShowError
+                  _errorText != null
                       ? Theme.of(context).appColors.red
                       : Theme.of(context).appColors.border,
             ),
@@ -173,14 +127,10 @@ class _InputFieldStateState extends State<InputFieldState> {
             ],
           ),
         ),
-        if (shouldShowError)
+        if (_errorText != null)
           Padding(
             padding: const EdgeInsets.only(top: 8.0, left: 12.0),
-            child: AppText(
-              widget.state.errorText ?? _errorText ?? '',
-              color: Colors.red,
-              size: 12.0,
-            ),
+            child: AppText(_errorText!, color: Colors.red, size: 12.0),
           ),
       ],
     );

@@ -23,7 +23,7 @@ class AppText extends StatelessWidget {
       textAlign: textAlign,
       style: TextStyle(
         fontFamily: 'Satoshi',
-        fontWeight: weight,
+        fontWeight: weight ?? FontWeight.w500,
         fontSize: size,
         color: color ?? Theme.of(context).appColors.text,
       ),

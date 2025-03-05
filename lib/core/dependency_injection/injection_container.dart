@@ -1,4 +1,6 @@
 import 'package:sisyphus/navigation/navigation_service.dart';
+import 'package:sisyphus/services/binance_interface.dart';
+import 'package:sisyphus/services/binance_service.dart';
 import 'package:sisyphus/utils/helpers/dio.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -11,4 +13,5 @@ void init() {
   );
 
   sl.registerLazySingleton<Dio>(() => DioHelper.instance);
+  sl.registerLazySingleton<IBinanceService>(() => BinanceService());
 }
