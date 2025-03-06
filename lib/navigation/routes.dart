@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisyphus/screens/home/home_view.dart';
+import 'package:sisyphus/screens/network_status/network_status_view.dart';
 
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -18,6 +19,7 @@ abstract class AppRouter {
 
   /// Returns a map of all the routes in the app.
   static Map<String, WidgetBuilder> getRouteWidget(RouteSettings settings) => {
-    '/': (_) => const HomeView(),
+    '/': (_) => const NetworkStatusView(),
+    '/home': (_) => const HomeView(),
   };
 }

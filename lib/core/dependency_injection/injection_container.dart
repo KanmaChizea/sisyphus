@@ -1,9 +1,9 @@
 import 'package:sisyphus/navigation/navigation_service.dart';
 import 'package:sisyphus/services/binance_interface.dart';
 import 'package:sisyphus/services/binance_service.dart';
-import 'package:sisyphus/utils/helpers/dio.dart';
-import 'package:dio/dio.dart';
+
 import 'package:get_it/get_it.dart';
+import 'package:sisyphus/utils/helpers/network_status_checker.dart';
 
 final sl = GetIt.instance;
 
@@ -12,6 +12,6 @@ void init() {
     () => NavigationService(navigatorKey: navigatorKey),
   );
 
-  sl.registerLazySingleton<Dio>(() => DioHelper.instance);
   sl.registerLazySingleton<IBinanceService>(() => BinanceService());
+  sl.registerLazySingleton<NetworkStatusChecker>(() => NetworkStatusChecker());
 }
