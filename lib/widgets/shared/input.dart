@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:sisyphus/theme/extension.dart';
 import 'package:sisyphus/utils/helpers/formatters.dart';
@@ -89,7 +91,9 @@ class _InputFieldState extends State<InputField> {
                   obscureText: widget.obscureText ?? false,
                   validator: widget.validator,
                   forceErrorText: '',
+
                   onChanged: (val) {
+                    log(val);
                     if (widget.keyboardType == TextInputType.number) {
                       final formattedText = Formatters.parseAndFormatNumber(
                         val,
@@ -104,10 +108,11 @@ class _InputFieldState extends State<InputField> {
                     if (widget.onChangeText != null) widget.onChangeText!(val);
                   },
 
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Satoshi',
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
+                    color: Theme.of(context).appColors.text,
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,

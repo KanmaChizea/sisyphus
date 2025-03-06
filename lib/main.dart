@@ -2,12 +2,10 @@ import 'package:sisyphus/navigation/navigation_service.dart';
 import 'package:sisyphus/navigation/routes.dart';
 import 'package:sisyphus/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:sisyphus/utils/helpers/network_status_checker.dart';
 import 'core/dependency_injection/injection_container.dart' as di;
 
 void main() {
   di.init();
-  di.sl.get<NetworkStatusChecker>().startMonitoring();
   runApp(const MyApp());
 }
 

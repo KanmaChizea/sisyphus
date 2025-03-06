@@ -58,17 +58,17 @@ class NetworkStatusChecker {
 
   // Check complete network status
   Future<NetworkStatus> checkNetworkStatus() async {
-    final hasInternet = await hasInternetConnection();
-    if (!hasInternet) {
-      return NetworkStatus.noInternet;
-    }
-
     final hasBinanceAccess = await canAccessBinanceApi();
-    if (!hasBinanceAccess) {
+
+    if (hasBinanceAccess) {
+      return NetworkStatus.connected;
+    } else {
+      final hasInternet = await hasInternetConnection();
+      if (!hasInternet) {
+        return NetworkStatus.noInternet;
+      }
       return NetworkStatus.vpnRequired;
     }
-
-    return NetworkStatus.connected;
   }
 
   void startMonitoring() {

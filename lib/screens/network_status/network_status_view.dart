@@ -41,7 +41,10 @@ class NetworkStatusView extends StatelessWidget {
                             AppIcons.svg(
                               AppIcons.web,
                               size: 50,
-                              color: Theme.of(context).appColors.text,
+                              color:
+                                  state.status == NetworkStatus.connected
+                                      ? Theme.of(context).appColors.green
+                                      : Theme.of(context).appColors.text,
                             ),
                             AppText(
                               state.status?.description ?? '',
@@ -53,11 +56,13 @@ class NetworkStatusView extends StatelessWidget {
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 32),
-                            CustomButton(
-                              text: 'Retry',
-                              onPressed: () => vm.initialize(context.mounted),
-                              backgroundColor: Theme.of(context).appColors.red,
-                            ),
+                            if (state.status != NetworkStatus.connected)
+                              CustomButton(
+                                text: 'Retry',
+                                onPressed: () => vm.initialize(context.mounted),
+                                backgroundColor:
+                                    Theme.of(context).appColors.red,
+                              ),
                             Expanded(flex: 3, child: Container()),
                           ],
                         ),
