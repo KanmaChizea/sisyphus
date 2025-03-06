@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sisyphus/theme/extension.dart';
 import 'package:sisyphus/widgets/home/candlestick.dart';
 import 'package:sisyphus/widgets/home/order_book.dart';
-import 'package:sisyphus/widgets/tab.dart';
+import 'package:sisyphus/widgets/shared/tab.dart';
 
 class DataContent extends StatelessWidget {
   const DataContent({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisyphus/theme/extension.dart';
-import 'package:sisyphus/widgets/dropdown.dart';
-import 'package:sisyphus/widgets/tooltip.dart';
-import 'package:sisyphus/widgets/typography.dart';
+import 'package:sisyphus/widgets/shared/dropdown.dart';
+import 'package:sisyphus/widgets/shared/tooltip.dart';
+import 'package:sisyphus/widgets/shared/typography.dart';
 
 class DropdownInput<T> extends StatelessWidget {
   const DropdownInput({

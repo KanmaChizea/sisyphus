@@ -4,7 +4,7 @@ import 'package:sisyphus/screens/buy_sell/buy_sell_viewmodel.dart';
 import 'package:sisyphus/theme/extension.dart';
 import 'package:sisyphus/utils/viewmodel/viewmodel_widget.dart';
 import 'package:sisyphus/widgets/home/buy_form.dart';
-import 'package:sisyphus/widgets/tab.dart';
+import 'package:sisyphus/widgets/shared/tab.dart';
 
 class BuySellView extends StatelessWidget {
   final FormTab initialTab;

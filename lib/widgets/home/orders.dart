@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sisyphus/theme/extension.dart';
-import 'package:sisyphus/widgets/empty.dart';
-import 'package:sisyphus/widgets/tab.dart';
+import 'package:sisyphus/widgets/shared/empty.dart';
+import 'package:sisyphus/widgets/shared/tab.dart';
 
 class Orders extends StatelessWidget {
   const Orders({super.key});

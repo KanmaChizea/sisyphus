@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sisyphus/screens/home/home_viewmodel.dart';
 import 'package:sisyphus/screens/home/orderbook_state.dart';
 import 'package:sisyphus/theme/extension.dart';
-import 'package:sisyphus/widgets/dropdown.dart';
-import 'package:sisyphus/widgets/icons.dart';
-import 'package:sisyphus/widgets/typography.dart';
+import 'package:sisyphus/widgets/shared/dropdown.dart';
+import 'package:sisyphus/widgets/shared/icons.dart';
+import 'package:sisyphus/widgets/shared/typography.dart';
 
 class OrderBook extends StatelessWidget {
   const OrderBook({super.key});

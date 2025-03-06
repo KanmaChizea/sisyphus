@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sisyphus/widgets/icons.dart';
+import 'package:sisyphus/widgets/shared/icons.dart';
 
 class AppToolTip extends StatelessWidget {
   const AppToolTip({super.key, required this.message, this.icon});

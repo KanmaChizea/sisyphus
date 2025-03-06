@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sisyphus/widgets/typography.dart';
+import 'package:sisyphus/widgets/shared/typography.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;

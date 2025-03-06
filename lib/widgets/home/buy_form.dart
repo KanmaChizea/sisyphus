@@ -5,14 +5,14 @@ import 'package:sisyphus/screens/buy_sell/buy_sell_viewmodel.dart';
 import 'package:sisyphus/theme/extension.dart';
 import 'package:sisyphus/utils/helpers/formatters.dart';
 import 'package:sisyphus/utils/helpers/validation.dart';
-import 'package:sisyphus/widgets/button.dart';
-import 'package:sisyphus/widgets/check_item.dart';
-import 'package:sisyphus/widgets/dropdown.dart';
-import 'package:sisyphus/widgets/dropdown_input.dart';
-import 'package:sisyphus/widgets/icons.dart';
-import 'package:sisyphus/widgets/input.dart';
-import 'package:sisyphus/widgets/tab.dart';
-import 'package:sisyphus/widgets/typography.dart';
+import 'package:sisyphus/widgets/shared/button.dart';
+import 'package:sisyphus/widgets/shared/check_item.dart';
+import 'package:sisyphus/widgets/shared/dropdown.dart';
+import 'package:sisyphus/widgets/shared/dropdown_input.dart';
+import 'package:sisyphus/widgets/shared/icons.dart';
+import 'package:sisyphus/widgets/shared/input.dart';
+import 'package:sisyphus/widgets/shared/tab.dart';
+import 'package:sisyphus/widgets/shared/typography.dart';
 
 class BuyForm extends StatefulWidget {
   const BuyForm({super.key});

@@ -4,8 +4,8 @@ import 'package:flutter_echarts/flutter_echarts.dart';
 import 'package:sisyphus/screens/home/chart_state.dart';
 import 'package:sisyphus/screens/home/home_viewmodel.dart';
 import 'package:sisyphus/theme/extension.dart';
-import 'package:sisyphus/widgets/icons.dart';
-import 'package:sisyphus/widgets/typography.dart';
+import 'package:sisyphus/widgets/shared/icons.dart';
+import 'package:sisyphus/widgets/shared/typography.dart';
 
 class Candlestick extends StatelessWidget {
   const Candlestick({super.key});

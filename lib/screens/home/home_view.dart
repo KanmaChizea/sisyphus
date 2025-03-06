@@ -6,13 +6,13 @@ import 'package:sisyphus/screens/buy_sell/buy_sell_view.dart';
 import 'package:sisyphus/screens/home/home_viewmodel.dart';
 import 'package:sisyphus/theme/extension.dart';
 import 'package:sisyphus/utils/viewmodel/viewmodel_widget.dart';
-import 'package:sisyphus/widgets/button.dart';
+import 'package:sisyphus/widgets/shared/button.dart';
 import 'package:sisyphus/widgets/home/avi.dart';
 import 'package:sisyphus/widgets/home/data_content.dart';
 import 'package:sisyphus/widgets/home/menu_button.dart';
 import 'package:sisyphus/widgets/home/orders.dart';
 import 'package:sisyphus/widgets/home/top_info.dart';
-import 'package:sisyphus/widgets/icons.dart';
+import 'package:sisyphus/widgets/shared/icons.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
