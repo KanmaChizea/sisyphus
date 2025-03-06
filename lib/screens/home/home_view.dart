@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sisyphus/core/constants/images.dart';
 import 'package:sisyphus/screens/buy_sell/buy_sell_state.dart';
 import 'package:sisyphus/screens/buy_sell/buy_sell_view.dart';
-import 'package:sisyphus/screens/home/home_state.dart';
 import 'package:sisyphus/screens/home/home_viewmodel.dart';
 import 'package:sisyphus/theme/extension.dart';
 import 'package:sisyphus/utils/viewmodel/viewmodel_widget.dart';
@@ -14,15 +14,41 @@ import 'package:sisyphus/widgets/home/orders.dart';
 import 'package:sisyphus/widgets/home/top_info.dart';
 import 'package:sisyphus/widgets/icons.dart';
 
-class HomeView extends ViewModelWidget<HomeViewmodel, HomeState> {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  HomeViewmodel createViewModel(BuildContext context) =>
-      HomeViewmodel()..initialize();
+  Widget build(BuildContext context) {
+    return ViewModelWidget(
+      viewModel: (_) => HomeViewmodel(),
+      child: (viewmodel, state) => const HomeContent(),
+    );
+  }
+}
+
+class HomeContent extends StatefulWidget {
+  const HomeContent({super.key});
 
   @override
-  Widget createView(context, viewModel, state) {
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeViewmodel>().initialize();
+    context.read<HomeViewmodel>().initializeCandleStick();
+  }
+
+  @override
+  void dispose() {
+    context.read<HomeViewmodel>().dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).appColors.background,
       appBar: AppBar(

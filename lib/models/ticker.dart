@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class Ticker extends Equatable {
-  Ticker({
+  const Ticker({
     required this.changeValue,
     required this.changePercentage,
     required this.highValue,

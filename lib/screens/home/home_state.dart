@@ -25,7 +25,7 @@ class HomeState extends Equatable {
   final ChartState chartState;
 
   factory HomeState.initial() => HomeState(
-    ticker: Ticker(
+    ticker: const Ticker(
       changeValue: '',
       changePercentage: '',
       highValue: '',

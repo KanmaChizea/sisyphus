@@ -10,6 +10,7 @@ class AppIcons {
   static const String arrowDown = '${_basePath}arrow-down.svg';
   static const String arrowDownRound = '${_basePath}arrow-down-round.svg';
   static const String arrowUp = '${_basePath}arrow-up.svg';
+  static const String chart = '${_basePath}chart.svg';
   static const String check = '${_basePath}check.svg';
   static const String checkActive = '${_basePath}check-active.svg';
   static const String clock = '${_basePath}clock.svg';
@@ -19,9 +20,11 @@ class AppIcons {
   static const String info = '${_basePath}info-circle.svg';
   static const String logo = '${_basePath}logo.svg';
   static const String menu = '${_basePath}menu.svg';
-  static const String redLine = '${_basePath}red-line.svg';
   static const String redGreenLine = '${_basePath}red-green-line.svg';
+  static const String redLine = '${_basePath}red-line.svg';
+  static const String redo = '${_basePath}redo.svg';
   static const String search = '${_basePath}search.svg';
+  static const String undo = '${_basePath}undo.svg';
   static const String volume = '${_basePath}volume.svg';
   static const String web = '${_basePath}globe.svg';
 

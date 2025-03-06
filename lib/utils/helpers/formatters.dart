@@ -64,4 +64,10 @@ class Formatters {
     double parsedValue = parseFormattedNumber(value);
     return parsedValue.toStringAsFixed(2);
   }
+
+  static String date(int value, String format) {
+    return DateFormat(
+      format,
+    ).format(DateTime.fromMicrosecondsSinceEpoch(value));
+  }
 }

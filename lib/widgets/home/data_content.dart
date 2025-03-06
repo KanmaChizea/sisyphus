@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisyphus/theme/extension.dart';
+import 'package:sisyphus/widgets/home/candlestick.dart';
 import 'package:sisyphus/widgets/home/order_book.dart';
 import 'package:sisyphus/widgets/tab.dart';
 
@@ -13,7 +14,11 @@ class DataContent extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: CustomTab(
         tabTitles: const ['Charts', 'Orderbooks', 'Recent trades'],
-        children: [Container(), OrderBook(), Container()],
+        children: [
+          const Candlestick(),
+          const OrderBook(),
+          Container(height: MediaQuery.of(context).size.height * 0.4),
+        ],
       ),
     );
   }

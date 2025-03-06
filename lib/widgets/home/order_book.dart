@@ -83,39 +83,40 @@ class OrderBook extends StatelessWidget {
               ],
             ),
             // Asks rows
-            ...state.asks
-                .sublist(0, state.askLength)
-                .map(
-                  (e) => TableRow(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 6),
-                        child: AppText(
-                          e.price.toStringAsFixed(2),
-                          textAlign: TextAlign.center,
-                          size: 12,
-                          color: Theme.of(context).appColors.red,
+            if (state.asks.isNotEmpty)
+              ...state.asks
+                  .sublist(0, state.askLength)
+                  .map(
+                    (e) => TableRow(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: AppText(
+                            e.price.toStringAsFixed(2),
+                            textAlign: TextAlign.center,
+                            size: 12,
+                            color: Theme.of(context).appColors.red,
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 6),
-                        child: AppText(
-                          e.quantity.toStringAsFixed(2),
-                          textAlign: TextAlign.center,
-                          size: 12,
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: AppText(
+                            e.quantity.toStringAsFixed(2),
+                            textAlign: TextAlign.center,
+                            size: 12,
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 6),
-                        child: AppText(
-                          e.total.toStringAsFixed(2),
-                          textAlign: TextAlign.center,
-                          size: 12,
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: AppText(
+                            e.total.toStringAsFixed(2),
+                            textAlign: TextAlign.center,
+                            size: 12,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
           ],
         ),
         if (state.selectedFilter == OrderbookFilter.both)
@@ -145,44 +146,45 @@ class OrderBook extends StatelessWidget {
             ),
           ),
         // Bids rows
-        Table(
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          children:
-              state.bids
-                  .sublist(0, state.bidLength)
-                  .map(
-                    (e) => TableRow(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: AppText(
-                            e.price.toStringAsFixed(2),
-                            textAlign: TextAlign.center,
-                            size: 12,
-                            color: Theme.of(context).appColors.green,
+        if (state.bids.isNotEmpty)
+          Table(
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            children:
+                state.bids
+                    .sublist(0, state.bidLength)
+                    .map(
+                      (e) => TableRow(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            child: AppText(
+                              e.price.toStringAsFixed(2),
+                              textAlign: TextAlign.center,
+                              size: 12,
+                              color: Theme.of(context).appColors.green,
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: AppText(
-                            e.quantity.toStringAsFixed(2),
-                            textAlign: TextAlign.center,
-                            size: 12,
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            child: AppText(
+                              e.quantity.toStringAsFixed(2),
+                              textAlign: TextAlign.center,
+                              size: 12,
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: AppText(
-                            e.total.toStringAsFixed(2),
-                            textAlign: TextAlign.center,
-                            size: 12,
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            child: AppText(
+                              e.total.toStringAsFixed(2),
+                              textAlign: TextAlign.center,
+                              size: 12,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                  .toList(),
-        ),
+                        ],
+                      ),
+                    )
+                    .toList(),
+          ),
       ],
     );
   }
